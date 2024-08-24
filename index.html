@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layout with Chat</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      .sidebar {
+        height: calc(100vh - 56px);
+        overflow-y: auto;
+      }
+      #chat-container {
+        width: 350px;
+        height: 500px;
+        max-height: calc(100vh - 100px);
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        transform: translateY(100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      #chat-container.show {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      #chat-messages {
+        height: calc(100% - 110px);
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header and sidebar code remains the same -->
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Data Catalog</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Domains</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Datasets</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Left Tree Panel -->
+        <div class="col-3 col-lg-2 d-md-block bg-light sidebar">
+          <div class="position-sticky pt-3">
+            <h6
+              class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+            >
+              <span>Business Domains</span>
+            </h6>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="bi bi-building"></i> Navista
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="bi bi-hospital"></i> Ohio Medical Care
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="col-9 ms-sm-auto col-lg-10 px-md-4">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="h2">Dataset Details</h1>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-header">Metadata Information</div>
+            <div class="card-body">
+              <h5 class="card-title">Patient Visits and Allergies</h5>
+              <p class="card-text">
+                This dataset contains detailed metadata information for patient
+                visits and allergies.
+              </p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <strong>Owner:</strong> Dr. John Doe
+                </li>
+                <li class="list-group-item">
+                  <strong>Last Updated:</strong> August 15, 2024
+                </li>
+                <li class="list-group-item">
+                  <strong>Number of Records:</strong> 12,345
+                </li>
+                <li class="list-group-item">
+                  <strong>Access Level:</strong> Restricted
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="text-muted">
+            For more information on this dataset or to request access, please
+            contact the data owner.
+          </p>
+        </main>
+      </div>
+    </div>
+
+    <!-- Chat toggle button -->
+    <button
+      id="chat-toggle"
+      class="btn btn-primary position-fixed bottom-0 end-0 m-3"
+    >
+      <i class="bi bi-chat-dots"></i> Chat
+    </button>
+
+    <!-- Pop-up Chat Container -->
+    <div
+      id="chat-container"
+      class="position-fixed bottom-0 end-0 m-3 bg-white shadow rounded d-flex flex-column"
+    >
+      <!-- Chat header -->
+      <div
+        class="d-flex justify-content-between align-items-center p-3 border-bottom"
+      >
+        <h5 class="mb-0">Chat</h5>
+        <button id="chat-close" class="btn btn-link text-dark p-0">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <!-- Chat messages -->
+      <div
+        id="chat-messages"
+        class="flex-grow-1 overflow-auto bg-light text-dark"
+      >
+        <!-- User Message -->
+        <div class="d-flex p-3">
+          <img
+            src="https://dummyimage.com/256x256/363536/ffffff&text=U"
+            class="rounded-circle me-2"
+            style="width: 30px; height: 30px"
+          />
+          <div class="d-flex align-items-center">
+            <p class="mb-0 small">Explain quantum computing in simple terms</p>
+          </div>
+        </div>
+
+        <!-- AI Response -->
+        <div class="d-flex p-3 bg-white">
+          <img
+            src="https://dummyimage.com/256x256/354ea1/ffffff&text=G"
+            class="rounded-circle me-2"
+            style="width: 30px; height: 30px"
+          />
+          <div class="d-flex flex-column w-100">
+            <p class="mb-2 small">
+              Quantum computing is a new type of computing that relies on the
+              principles of quantum physics. Traditional computers use bits to
+              store and process information, representing either a 0 or a 1. In
+              contrast, quantum computers use quantum bits, or qubits.
+              <br /><br />
+              Unlike bits, qubits can represent not only a 0 or a 1 but also a
+              superposition of both states simultaneously. This means that a
+              qubit can be in multiple states at once, which allows quantum
+              computers to perform certain calculations much faster and more
+              efficiently.
+            </p>
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn btn-link text-secondary p-0">
+                <i class="bi bi-hand-thumbs-up"></i>
+              </button>
+              <button class="btn btn-link text-secondary p-0">
+                <i class="bi bi-hand-thumbs-down"></i>
+              </button>
+              <button class="btn btn-link text-secondary p-0">
+                <i class="bi bi-clipboard"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prompt message input -->
+      <form class="d-flex align-items-center bg-light border-top p-2">
+        <button class="btn btn-link text-dark" type="button">
+          <i class="bi bi-plus-lg"></i>
+        </button>
+        <textarea
+          id="chat-input"
+          class="form-control mx-2"
+          rows="1"
+          placeholder="Enter your prompt"
+        ></textarea>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const chatToggle = document.getElementById('chat-toggle');
+      const chatContainer = document.getElementById('chat-container');
+      const chatClose = document.getElementById('chat-close');
+
+      chatToggle.addEventListener('click', function () {
+        chatContainer.classList.add('show');
+        this.style.display = 'none';
+      });
+
+      chatClose.addEventListener('click', function () {
+        chatContainer.classList.remove('show');
+        chatToggle.style.display = 'block';
+      });
+    </script>
+  </body>
+</html>
