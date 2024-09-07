@@ -1,0 +1,19 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+  <div class="row">
+    <app-sidebar class="col-3 col-lg-2 d-md-block py-3"></app-sidebar>
+    <app-main-content class="col-9 ms-sm-auto col-lg-10 px-md-4"></app-main-content>
+  </div>
+</div>
+<button
+  class="btn btn-primary position-fixed bottom-0 end-0 m-3"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#chatOffcanvas"
+  aria-controls="chatOffcanvas"
+>
+  <i class="bi bi-chat-dots"></i> Chat
+</button>
+
+<app-chat></app-chat>

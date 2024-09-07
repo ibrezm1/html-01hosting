@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DataCatalog Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+      :root {
+        --primary-color: #0056b3;
+        --secondary-color: #6c757d;
+      }
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .sidebar {
+        height: calc(100vh - 56px);
+        overflow-y: auto;
+        background-color: #f8f9fa;
+      }
+      .navbar {
+        background-color: var(--primary-color) !important;
+      }
+      .navbar-brand, .nav-link {
+        color: white !important;
+      }
+      .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+      .card-header {
+        background-color: var(--primary-color);
+        color: white;
+      }
+      .hero-image {
+        background-image: url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="https://via.placeholder.com/30x30" alt="Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+          DataCatalog Pro
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Domains</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Datasets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Releases</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                More
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Documentation</a></li>
+                <li><a class="dropdown-item" href="#">Support</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">About Us</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Left Tree Panel -->
+        <div class="col-3 col-lg-2 d-md-block py-3">
+          <div class="position-sticky">
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span style="color: blue;">Business Domains</span>
+            </h6>
+            <div class="px-3 mb-3">
+              <input type="text" class="form-control" placeholder="Search domains...">
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="color: blue !important;">
+                  <i class="bi bi-building"></i> Navista
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="color: blue !important;">
+                  <i class="bi bi-hospital"></i> Ohio Medical Care
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="color: blue !important;">
+                  <i class="bi bi-shop"></i> Retail Solutions
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="color: blue !important;">
+                  <i class="bi bi-bank"></i> Financial Services
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        <!-- Main Content Area -->
+        <main class="col-9 ms-sm-auto col-lg-10 px-md-4">
+          <div class="hero-image mb-4">
+            <h1 class="display-4">Welcome to DataCatalog Pro</h1>
+          </div>
+
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Datasets</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dataset Details</li>
+              </ol>
+            </nav>
+            
+
+
+
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dataset Details</h1>
+          </div>
+
+    <div class="row">
+  <!-- Sample Datasets (Left Column) -->
+  <div class="col-md-8">
+        <h5 class="card-title">Patient Visits and Allergies</h5>
+        <p class="card-text">
+          This dataset contains detailed metadata information for patient visits and allergies.
+        </p>
+
+    <!-- Search Datasets -->
+    <div class="input-group mb-4">
+      <input type="text" class="form-control" placeholder="Search datasets..." aria-label="Search datasets">
+      <button class="btn btn-primary" type="button">Search</button>
+    </div>
+
+    <div class="dataset-content mb-4">
+      <div class="organization-type-wrap mb-2">
+        <span class="badge bg-primary" title="Healthcare Provider">Healthcare</span>
+      </div>
+      <h3 class="dataset-heading h5" pkg_id="844dbad1-ee1e-44b8-9799-34cb7ed24640">
+        <a href="#" class="text-decoration-none">Patient Demographics and Visit Data</a>
+        <span class="recent-views recent-views-datagov ms-2" title="1785" style="font-size: 0.8em;">
+          <i class="bi bi-graph-up"></i> 1785 recent views
+        </span>
+      </h3>
+      <div class="notes">
+        <p class="dataset-organization mb-1">Navista Health Systems —</p>
+        <div>This dataset provides anonymized patient demographic information and visit data, including age, gender, visit dates, and primary diagnoses...</div>
+      </div>
+      <ul class="dataset-resources list-inline mt-2">
+        <li class="list-inline-item">
+          <a href="#" class="badge bg-secondary text-decoration-none">CSV</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#" class="badge bg-secondary text-decoration-none">JSON</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#" class="badge bg-secondary text-decoration-none">XML</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="dataset-content">
+      <div class="organization-type-wrap mb-2">
+        <span class="badge bg-primary" title="Healthcare Provider">Healthcare</span>
+      </div>
+      <h3 class="dataset-heading h5" pkg_id="955ecbd2-ff2f-55c9-8899-45db8ed35751">
+        <a href="#" class="text-decoration-none">Medication and Allergy Records</a>
+        <span class="recent-views recent-views-datagov ms-2" title="2103" style="font-size: 0.8em;">
+          <i class="bi bi-graph-up"></i> 2103 recent views
+        </span>
+      </h3>
+      <div class="notes">
+        <p class="dataset-organization mb-1">Navista Health Systems —</p>
+        <div>This dataset contains anonymized records of patient medications and allergies, including drug names, dosages, start/end dates, and reported allergic reactions...</div>
+      </div>
+      <ul class="dataset-resources list-inline mt-2">
+        <li class="list-inline-item">
+          <a href="#" class="badge bg-secondary text-decoration-none">CSV</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#" class="badge bg-secondary text-decoration-none">JSON</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#" class="badge bg-secondary text-decoration-none">XML</a>
+        </li>
+      </ul>
+    </div>         
+  </div>
+
+  <!-- Metadata Information and Quick Actions (Right Column) -->
+  <div class="col-md-4">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h5 class="my-0 font-weight-normal">Metadata Information</h5>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>Owner:</strong> Dr. John Doe
+          </li>
+          <li class="list-group-item">
+            <strong>Last Updated:</strong> August 15, 2024
+          </li>
+          <li class="list-group-item">
+            <strong>Number of Records:</strong> 12,345
+          </li>
+          <li class="list-group-item">
+            <strong>Access Level:</strong> Restricted
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h5 class="my-0 font-weight-normal">Quick Actions</h5>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a href="#" class="text-decoration-none"><i class="bi bi-download me-2"></i>Download Dataset</a></li>
+          <li class="list-group-item"><a href="#" class="text-decoration-none"><i class="bi bi-graph-up me-2"></i>View Analytics</a></li>
+          <li class="list-group-item"><a href="#" class="text-decoration-none"><i class="bi bi-share me-2"></i>Share Dataset</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Offcanvas Chat Container -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="chatOffcanvas" aria-labelledby="chatOffcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="chatOffcanvasLabel">Chat</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column">
+        <!-- Chat messages -->
+        <div id="chat-messages" class="flex-grow-1 overflow-auto bg-light text-dark">
+          <!-- User Message -->
+          <div class="d-flex p-3">
+            <img src="https://dummyimage.com/256x256/363536/ffffff&text=U" class="rounded-circle me-2" style="width: 30px; height: 30px" />
+            <div class="d-flex align-items-center">
+              <p class="mb-0 small">Explain quantum computing in simple terms</p>
+            </div>
+          </div>
+          <!-- AI Response -->
+          <div class="d-flex p-3 bg-white">
+            <img src="https://dummyimage.com/256x256/354ea1/ffffff&text=G" class="rounded-circle me-2" style="width: 30px; height: 30px" />
+            <div class="d-flex flex-column w-100">
+              <p class="mb-2 small">
+                Quantum computing is a new type of computing that relies on the principles of quantum physics. Traditional computers use bits to store and process information, representing either a 0 or a 1. In contrast, quantum computers use quantum bits, or qubits.
+                <br /><br />
+                Unlike bits, qubits can represent not only a 0 or a 1 but also a superposition of both states simultaneously. This means that a qubit can be in multiple states at once, which allows quantum computers to perform certain calculations much faster and more efficiently.
+              </p>
+              <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-link text-secondary p-0">
+                  <i class="bi bi-hand-thumbs-up"></i>
+                </button>
+                <button class="btn btn-link text-secondary p-0">
+                  <i class="bi bi-hand-thumbs-down"></i>
+                </button>
+                <button class="btn btn-link text-secondary p-0">
+                  <i class="bi bi-clipboard"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Prompt message input -->
+        <form class="d-flex align-items-center bg-light border-top p-2">
+          <button class="btn btn-link text-dark" type="button">
+            <i class="bi bi-plus-lg"></i>
+          </button>
+          <textarea id="chat-input" class="form-control mx-2" rows="1" placeholder="Enter your prompt"></textarea>
+          <button class="btn btn-primary" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Chat toggle button -->
+    <button class="btn btn-primary position-fixed bottom-0 end-0 m-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#chatOffcanvas" aria-controls="chatOffcanvas">
+      <i class="bi bi-chat-dots"></i> Chat
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
