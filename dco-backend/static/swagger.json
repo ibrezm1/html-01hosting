@@ -1,0 +1,440 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "API for managing Business Domains, Datasets, Data Assets, and Columns.",
+      "version": "1.0.0",
+      "title": "Business Domain API",
+      "contact": {
+        "email": "support@example.com"
+      }
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Business Domains",
+        "description": "Operations related to Business Domains"
+      },
+      {
+        "name": "Datasets",
+        "description": "Operations related to Datasets"
+      },
+      {
+        "name": "Data Assets",
+        "description": "Operations related to Data Assets"
+      },
+      {
+        "name": "Columns",
+        "description": "Operations related to Columns"
+      }
+    ],
+    "paths": {
+      "/business_domains": {
+        "get": {
+          "tags": ["Business Domains"],
+          "summary": "Get all business domains",
+          "description": "Retrieve a list of all business domains or filter by name.",
+          "parameters": [
+            {
+              "name": "name",
+              "in": "query",
+              "description": "Filter business domains by name",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A list of business domains",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/BusinessDomain"
+                }
+              }
+            },
+            "404": {
+              "description": "Business Domain not found"
+            }
+          }
+        }
+      },
+      "/business_domains/{id}": {
+        "get": {
+          "tags": ["Business Domains"],
+          "summary": "Get a specific business domain",
+          "description": "Retrieve a business domain by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Details of the business domain",
+              "schema": {
+                "$ref": "#/definitions/BusinessDomain"
+              }
+            },
+            "404": {
+              "description": "Business Domain not found"
+            }
+          }
+        }
+      },
+      "/business_domains/{id}/datasets": {
+        "get": {
+          "tags": ["Datasets"],
+          "summary": "Get datasets of a business domain",
+          "description": "Retrieve a list of datasets for a specific business domain or filter datasets by name or owner.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "name",
+              "in": "query",
+              "description": "Filter datasets by name",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "owner",
+              "in": "query",
+              "description": "Filter datasets by owner",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A list of datasets",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Dataset"
+                }
+              }
+            },
+            "404": {
+              "description": "Dataset not found"
+            }
+          }
+        }
+      },
+      "/business_domains/{id}/datasets/{dataset_id}": {
+        "get": {
+          "tags": ["Datasets"],
+          "summary": "Get a specific dataset",
+          "description": "Retrieve a dataset by its ID within a specific business domain.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "dataset_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Details of the dataset",
+              "schema": {
+                "$ref": "#/definitions/Dataset"
+              }
+            },
+            "404": {
+              "description": "Dataset not found"
+            }
+          }
+        }
+      },
+      "/business_domains/{id}/datasets/{dataset_id}/data_assets": {
+        "get": {
+          "tags": ["Data Assets"],
+          "summary": "Get data assets of a dataset",
+          "description": "Retrieve a list of data assets for a specific dataset within a business domain.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "dataset_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "name",
+              "in": "query",
+              "description": "Filter data assets by name",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "asset_type",
+              "in": "query",
+              "description": "Filter data assets by type",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A list of data assets",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/DataAsset"
+                }
+              }
+            },
+            "404": {
+              "description": "Data Asset not found"
+            }
+          }
+        }
+      },
+      "/business_domains/{id}/datasets/{dataset_id}/data_assets/{data_asset_id}": {
+        "get": {
+          "tags": ["Data Assets"],
+          "summary": "Get a specific data asset",
+          "description": "Retrieve a data asset by its ID within a dataset and business domain.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "dataset_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "data_asset_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Details of the data asset",
+              "schema": {
+                "$ref": "#/definitions/DataAsset"
+              }
+            },
+            "404": {
+              "description": "Data Asset not found"
+            }
+          }
+        }
+      },
+      "/business_domains/{id}/datasets/{dataset_id}/data_assets/{data_asset_id}/columns": {
+        "get": {
+          "tags": ["Columns"],
+          "summary": "Get columns of a data asset",
+          "description": "Retrieve a list of columns for a specific data asset within a dataset and business domain.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "dataset_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "data_asset_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "name",
+              "in": "query",
+              "description": "Filter columns by name",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "data_type",
+              "in": "query",
+              "description": "Filter columns by data type",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A list of columns",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/ColumnInfo"
+                }
+              }
+            },
+            "404": {
+              "description": "Column not found"
+            }
+          }
+        }
+      },
+      "/business_domains/{id}/datasets/{dataset_id}/data_assets/{data_asset_id}/columns/{column_id}": {
+        "get": {
+          "tags": ["Columns"],
+          "summary": "Get a specific column",
+          "description": "Retrieve a column by its ID within a data asset, dataset, and business domain.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "dataset_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "data_asset_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "column_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Details of the column",
+              "schema": {
+                "$ref": "#/definitions/ColumnInfo"
+              }
+            },
+            "404": {
+              "description": "Column not found"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "BusinessDomain": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Dataset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "business_domain_id": {
+            "type": "integer"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "number_of_records": {
+            "type": "integer"
+          },
+          "access_level": {
+            "type": "string"
+          },
+          "recent_views": {
+            "type": "integer"
+          },
+          "custom_fields": {
+            "type": "string"
+          }
+        }
+      },
+      "DataAsset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "dataset_id": {
+            "type": "integer"
+          },
+          "asset_type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "ColumnInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "data_type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+  
