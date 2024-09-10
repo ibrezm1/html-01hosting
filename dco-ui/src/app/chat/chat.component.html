@@ -1,54 +1,62 @@
-  <!-- Offcanvas Chat Container -->
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="chatOffcanvas" aria-labelledby="chatOffcanvasLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="chatOffcanvasLabel">Chat</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body d-flex flex-column">
-      <!-- Chat messages -->
-      <div id="chat-messages" class="flex-grow-1 overflow-auto bg-light text-dark">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="chatOffcanvas" aria-labelledby="chatOffcanvasLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="chatOffcanvasLabel">Chat</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <!-- Chat messages -->
+    <div id="chat-messages" #chatMessagesRef class="flex-grow-1 overflow-auto bg-light text-dark">
+      <div *ngFor="let chat of chatMessages">
         <!-- User Message -->
-        <div class="d-flex p-3">
-          <img src="https://dummyimage.com/256x256/363536/ffffff&text=U" class="rounded-circle me-2" style="width: 30px; height: 30px" />
+        <div *ngIf="chat.type === 'user'" class="d-flex p-3">
+          <img
+            src="https://dummyimage.com/256x256/363536/ffffff&text=U"
+            class="rounded-circle me-2"
+            style="width: 30px; height: 30px"
+          />
           <div class="d-flex align-items-center">
-            <p class="mb-0 small">Explain quantum computing in simple terms</p>
+            <p class="mb-0 small">{{ chat.message }}</p>
           </div>
         </div>
         <!-- AI Response -->
-        <div class="d-flex p-3 bg-white">
-          <img src="https://dummyimage.com/256x256/354ea1/ffffff&text=G" class="rounded-circle me-2" style="width: 30px; height: 30px" />
+        <div *ngIf="chat.type === 'ai'" class="d-flex p-3 bg-white">
+          <img
+            src="https://dummyimage.com/256x256/354ea1/ffffff&text=G"
+            class="rounded-circle me-2"
+            style="width: 30px; height: 30px"
+          />
           <div class="d-flex flex-column w-100">
-            <p class="mb-2 small">
-              Quantum computing is a new type of computing that relies on the principles of quantum physics. Traditional computers use bits to store and process information, representing either a 0 or a 1. In contrast, quantum computers use quantum bits, or qubits.
-              <br /><br />
-              Unlike bits, qubits can represent not only a 0 or a 1 but also a superposition of both states simultaneously. This means that a qubit can be in multiple states at once, which allows quantum computers to perform certain calculations much faster and more efficiently.
-            </p>
+            <p class="mb-2 small">{{ chat.message }}</p>
             <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-link text-secondary p-0">
-                <i class="bi bi-hand-thumbs-up"></i>
-              </button>
-              <button class="btn btn-link text-secondary p-0">
-                <i class="bi bi-hand-thumbs-down"></i>
-              </button>
-              <button class="btn btn-link text-secondary p-0">
-                <i class="bi bi-clipboard"></i>
-              </button>
+              <button class="btn btn-link text-secondary p-0"><i class="bi bi-hand-thumbs-up"></i></button>
+              <button class="btn btn-link text-secondary p-0"><i class="bi bi-hand-thumbs-down"></i></button>
+              <button class="btn btn-link text-secondary p-0"><i class="bi bi-clipboard"></i></button>
             </div>
           </div>
         </div>
       </div>
-      <!-- Prompt message input -->
-      <form class="d-flex align-items-center bg-light border-top p-2">
-        <button class="btn btn-link text-dark" type="button">
-          <i class="bi bi-plus-lg"></i>
-        </button>
-        <textarea id="chat-input" class="form-control mx-2" rows="1" placeholder="Enter your prompt"></textarea>
-        <button class="btn btn-primary" type="submit">Send</button>
-      </form>
     </div>
-  </div>
 
-  <!-- Chat toggle button -->
-  <button class="btn btn-primary position-fixed bottom-0 end-0 m-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#chatOffcanvas" aria-controls="chatOffcanvas">
-    <i class="bi bi-chat-dots"></i> Chat
-  </button>
+    <!-- Prompt message input -->
+    <form class="d-flex align-items-center bg-light border-top p-2" (submit)="sendMessage()">
+      <button class="btn btn-link text-dark" type="button">
+        <i class="bi bi-plus-lg"></i>
+      </button>
+      <textarea
+        id="chat-input"
+        class="form-control mx-2"
+        rows="1"
+        placeholder="Enter your prompt"
+        [(ngModel)]="message"
+        (keydown.enter)="sendMessage(); $event.preventDefault();" 
+        name="chatMessage"
+      ></textarea>
+      <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+  </div>
+</div>
+
+<!-- Chat toggle button -->
+<button class="btn btn-primary position-fixed bottom-0 end-0 m-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#chatOffcanvas" aria-controls="chatOffcanvas">
+  <i class="bi bi-chat-dots"></i> Chat
+</button>

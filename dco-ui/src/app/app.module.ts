@@ -8,6 +8,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { ChatComponent } from './chat/chat.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +19,7 @@ import { ChatComponent } from './chat/chat.component';
     ChatComponent
   ],
   imports: [
+    HttpClientModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule

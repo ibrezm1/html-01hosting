@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request,abort
+from flask import Flask, jsonify, request,abort , render_template, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api, Resource
 from flask_swagger_ui import get_swaggerui_blueprint
 from datetime import datetime
+import time
 
 from flask_cors import CORS  # Import CORS
 
@@ -95,7 +96,7 @@ def limit_remote_addr():
 
 class BusinessDomainResource(Resource):
     def get(self, id=None):
-        query = BusinessDomain.query
+        query = BusinessDomain.queryResponse
         if id:
             domain = query.get(id)
             if not domain:
@@ -259,6 +260,48 @@ api.add_resource(DatasetResource, '/business_domains/<int:business_domain_id>/da
 api.add_resource(DataAssetResource, '/business_domains/<int:business_domain_id>/datasets/<int:dataset_id>/data_assets', '/business_domains/<int:business_domain_id>/datasets/<int:dataset_id>/data_assets/<int:data_asset_id>')
 api.add_resource(ColumnInfoResource, '/business_domains/<int:business_domain_id>/datasets/<int:dataset_id>/data_assets/<int:data_asset_id>/columns', '/business_domains/<int:business_domain_id>/datasets/<int:dataset_id>/data_assets/<int:data_asset_id>/columns/<int:column_id>')
 
+
+# Template Route for Stream HTML
+@app.route('/ts', methods=['GET'])
+def test_stream():
+    return render_template('test-stream.html')
+
+def stream_llm_responses(prompt):
+    responses = [f"Response part {i+1}" for i in range(10)]
+    for response in responses:
+        yield f"data: {response}\n\n"
+        time.sleep(1)  # Simulate delay
+
+@app.route('/stream-content', methods=['POST', 'GET'])
+def streamContent():
+    # Check if the Content-Type is application/json
+    if request.headers['Content-Type'] != 'application/json':
+        return jsonify({"error": "Unsupported Media Type, expected 'application/json'"}), 415
+
+    # Parse the JSON data from the request
+    data = request.get_json()
+    message = data.get("message")
+    model = data.get("model")
+
+    # Validate the presence of 'message' and 'model' parameters
+    if not message or not model:
+        return jsonify({"error": "Missing 'message' or 'model' parameter"}), 400
+
+    # Handle fixed model response
+    if model == 'fixed':
+        response_text = "This is a fixed response. Oops! I can't help but laugh. Did you really just say that?"
+        resp = Response(response_text)
+        resp.headers.add('Content-Type', 'application/text')
+        return resp
+
+    # Handle other models (streaming response from LLM)
+    else:
+        resp = Response(stream_llm_responses(message), content_type='text/event-stream')
+        return resp
+
+    # Return method not allowed for other methods
+    return jsonify({"error": "Method not allowed"}), 405
+
 if __name__ == '__main__':
     app.run(debug=True)
 
@@ -289,5 +332,7 @@ if __name__ == '__main__':
 #   authtoken: xxxxxxXXXXXXXXXXXX_XXXXXXXXXXXXXXXXXXXX
 # ngrok config check
 # ngrok tunnel --label edge=edghts_2lnTTHwUtP6DU9BIGjYw9fjKKTa http://localhost:5000
+
+
 
 
