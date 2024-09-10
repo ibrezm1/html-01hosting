@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class StreamService {
-  stream_url = 'http://localhost:5000' +  '/stream-content';
+  stream_url = 'http://localhost:5000' +  '/api/stream-content';
   //stream_url = 'http://localhost:5001/stream-gemini';
   streamMessage(message: string,model: string): Observable<string> {
 

@@ -9,7 +9,7 @@
       }
     },
     "host": "localhost:5000",
-    "basePath": "/",
+    "basePath": "/api/",
     "tags": [
       {
         "name": "Business Domains",
@@ -29,7 +29,7 @@
       }
     ],
     "paths": {
-      "/business_domains": {
+      "/business_domain": {
         "get": {
           "tags": ["Business Domains"],
           "summary": "Get all business domains",
@@ -59,7 +59,7 @@
           }
         }
       },
-      "/business_domains/{id}": {
+      "/business_domain/{id}": {
         "get": {
           "tags": ["Business Domains"],
           "summary": "Get a specific business domain",
@@ -85,7 +85,7 @@
           }
         }
       },
-      "/business_domains/{id}/datasets": {
+      "/business_domain/{id}/dataset": {
         "get": {
           "tags": ["Datasets"],
           "summary": "Get datasets of a business domain",
@@ -128,7 +128,7 @@
           }
         }
       },
-      "/business_domains/{id}/datasets/{dataset_id}": {
+      "/business_domain/{id}/dataset/{dataset_id}": {
         "get": {
           "tags": ["Datasets"],
           "summary": "Get a specific dataset",
@@ -160,7 +160,7 @@
           }
         }
       },
-      "/business_domains/{id}/datasets/{dataset_id}/data_assets": {
+      "/business_domain/{id}/dataset/{dataset_id}/data_asset": {
         "get": {
           "tags": ["Data Assets"],
           "summary": "Get data assets of a dataset",
@@ -209,7 +209,7 @@
           }
         }
       },
-      "/business_domains/{id}/datasets/{dataset_id}/data_assets/{data_asset_id}": {
+      "/business_domain/{id}/dataset/{dataset_id}/data_asset/{data_asset_id}": {
         "get": {
           "tags": ["Data Assets"],
           "summary": "Get a specific data asset",
@@ -247,7 +247,7 @@
           }
         }
       },
-      "/business_domains/{id}/datasets/{dataset_id}/data_assets/{data_asset_id}/columns": {
+      "/business_domain/{id}/dataset/{dataset_id}/data_asset/{data_asset_id}/column": {
         "get": {
           "tags": ["Columns"],
           "summary": "Get columns of a data asset",
@@ -302,7 +302,7 @@
           }
         }
       },
-      "/business_domains/{id}/datasets/{dataset_id}/data_assets/{data_asset_id}/columns/{column_id}": {
+      "/business_domain/{id}/dataset/{dataset_id}/data_asset/{data_asset_id}/column/{column_id}": {
         "get": {
           "tags": ["Columns"],
           "summary": "Get a specific column",

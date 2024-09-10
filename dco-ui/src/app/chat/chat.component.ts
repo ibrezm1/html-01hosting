@@ -8,8 +8,13 @@ import { StreamService } from '../stream.service';
 })
 export class ChatComponent {
   @ViewChild('chatMessagesRef') private chatMessagesContainer!: ElementRef;
-  constructor(private streamService: StreamService) {}
+
   message: string = '';
+  model: string = 'default'; // Assuming 'model' is chosen by user somewhere
+  showProcessing: boolean = false;
+
+  constructor(private streamService: StreamService) {}
+
   chatMessages: { user: string; message: string; type: string }[] = [
     { user: 'User', message: 'How can I find the right dataset for customer analytics?', type: 'user' },
     {
@@ -67,14 +72,46 @@ export class ChatComponent {
     }
   }
 
-  sendMessage() {
-    if (this.message.trim()) {
-      this.chatMessages.push({ user: 'User', message: this.message, type: 'user' });
-      this.message = '';
-      // Add AI response simulation for demonstration
-      setTimeout(() => {
-        this.chatMessages.push({ user: 'AI', message: 'AI response for your query...', type: 'ai' });
-      }, 1000);
-    }
+  sendMessage(): void {
+    if (!this.message || !this.model) return;  // Ensure there's a message and model before sending
+  
+    const input = this.message;
+    const model = this.model;
+  
+    // Add the user input to the chat messages array
+    this.chatMessages.push({ user: 'User', message: input, type: 'user' });
+  
+    // Clear the input field after sending
+    this.message = '';
+  
+    // Add an empty AI response message for streaming updates
+    this.chatMessages.push({ user: 'AI', message: '', type: 'ai' });
+  
+    // Show a loading indicator or processing state
+    this.showProcessing = true;
+  
+    // Call the stream service and subscribe to the response stream
+    this.streamService.streamMessage(input, model).subscribe(
+      (data: string) => {
+        // Update the last message with streaming data
+        const lastMessageIndex = this.chatMessages.length - 1;
+        this.chatMessages[lastMessageIndex] = { ...this.chatMessages[lastMessageIndex], message: data };
+  
+        // Scroll to the bottom of the chat
+        this.scrollToBottom();
+      },
+      (error: any) => {
+        console.error('Error during streaming:', error);
+        this.showProcessing = false;
+      },
+      () => {
+        // End of the streaming, disable the loading indicator
+        this.showProcessing = false;
+        console.log('Streaming complete');
+      }
+    );
+  
+    // Scroll to the bottom of the chat after sending the message
+    this.scrollToBottom();
   }
 }
