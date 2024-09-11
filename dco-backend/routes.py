@@ -1,6 +1,6 @@
 # routes.py
 
-from flask import Flask, jsonify, request, render_template, Response
+from flask import Flask, jsonify, request, render_template, Response,send_from_directory
 from flask_restful import Api
 from flask_swagger_ui import get_swaggerui_blueprint
 from models import db
@@ -9,16 +9,16 @@ from config import Config
 from flask_cors import CORS  # Import CORS
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static')
     app.config.from_object(Config)
     db.init_app(app)
     api = Api(app)
     # Initialize CORS
-    CORS(app)  # Apply CORS to the app
+    CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
     # Swagger setup
     SWAGGER_URL = '/swagger'
-    API_URL = '/static/swagger.json'
+    API_URL = '/swagger/swagger.json'
     swagger_ui_blueprint = get_swaggerui_blueprint(
         SWAGGER_URL,
         API_URL,
@@ -34,17 +34,18 @@ def create_app():
     api.add_resource(StreamContentResource, '/api/stream-content')
 
     @app.route('/')
-    def home():
-        return jsonify({'message': 'Hello, World!'})
+    def index():
+        return send_from_directory(app.static_folder, 'index.html')
+
+    # Route to handle Angular routes
+    @app.route('/<path:path>')
+    def serve(path):
+        return send_from_directory(app.static_folder, path)
 
 
     @app.route('/ts')
     def test_stream():
         return render_template('test-stream.html')
 
-    @app.route('/swagger.json')
-    def swagger_spec():
-        with open('swagger/swagger.json') as f:
-            return Response(f.read(), mimetype='application/json')
 
     return app

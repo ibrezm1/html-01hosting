@@ -2,13 +2,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StreamService {
-  stream_url = 'http://localhost:5000' +  '/api/stream-content';
+  stream_url = environment.apiUrl +  '/stream-content';
   //stream_url = 'http://localhost:5001/stream-gemini';
   streamMessage(message: string,model: string): Observable<string> {
 
@@ -20,7 +20,8 @@ export class StreamService {
       fetch(this.stream_url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: message, model: model})
+        body: JSON.stringify({ message: message, model: model}),
+        credentials: 'include' // This will include cookies with the request
       })
       .then(response => response.body!.getReader())
       .then(reader => {
