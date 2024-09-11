@@ -85,9 +85,15 @@ deploy() {
 }
 
 # Check for command-line argument
-if [ "$#" -ne 1 ] || { [ "$1" != "local" ] && [ "$1" != "production" ]; }; then
-    echo "Usage: $0 <local|production>"
+if [ "$#" -ne 1 ] || { [ "$1" != "local" ] && [ "$1" != "production" ] && [ "$1" != "kill" ]; }; then
+    echo "Usage: $0 <local|production|kill>"
     exit 1
+fi
+
+# If the argument is "kill", only kill processes and exit
+if [ "$1" == "kill" ]; then
+    kill_processes
+    exit 0
 fi
 
 # Execute the deployment process
