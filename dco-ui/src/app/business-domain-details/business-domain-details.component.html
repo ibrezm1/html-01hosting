@@ -1,0 +1,28 @@
+<!-- business-domain-details.component.html -->
+<div *ngIf="domainDetails$ | async as domain">
+    <h1>{{ domain.name || 'No Name Available' }}</h1>
+    <p>{{ domain.description || 'No Description Available' }}</p>
+    <p>Database: {{ domain.db_name || 'Not Specified' }}</p>
+    <div *ngIf="domain.custom_fields">
+      <h2>Custom Fields</h2>
+      <ul>
+        <li *ngFor="let field of domain.custom_fields | keyvalue">
+          {{ field.key }}: {{ field.value }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <h2>Datasets</h2>
+  <input #searchBox (input)="searchDatasets(searchBox.value)" placeholder="Search datasets" />
+  
+  <ul>
+    <li *ngFor="let dataset of datasets$ | async">
+      <a [routerLink]="['/dataset', dataset.id]">
+        {{ dataset.name }}
+      </a>
+      <p>{{ dataset.description }}</p>
+      <p>Owner: {{ dataset.owner }}</p>
+      <p>Last Updated: {{ dataset.last_updated | date }}</p>
+    </li>
+  </ul>

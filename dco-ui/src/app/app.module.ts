@@ -9,6 +9,8 @@ import { MainContentComponent } from './main-content/main-content.component';
 import { ChatComponent } from './chat/chat.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { BusinessDomainDetailsComponent } from './business-domain-details/business-domain-details.component';
+import { DatasetDetailsComponent } from './dataset-details/dataset-details.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     SidebarComponent,
     MainContentComponent,
-    ChatComponent
+    ChatComponent,
+    BusinessDomainDetailsComponent,
+    DatasetDetailsComponent
   ],
   imports: [
     HttpClientModule,
