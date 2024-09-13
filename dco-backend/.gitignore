@@ -1,3 +1,10 @@
+# Ignore direct files in the static folder
+static/*
+
+# Exclude subfolders and their contents from being ignored
+!static/*/
+
+
 # Byte-compiled files
 __pycache__/
 *.py[cod]

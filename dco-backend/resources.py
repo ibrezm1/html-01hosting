@@ -71,7 +71,7 @@ class DatasetResource(Resource):
         } for dataset in datasets])
 
 class DataAssetResource(Resource):
-    def get(self, business_domain_id, dataset_id, data_asset_id=None):
+    def get(self, dataset_id, data_asset_id=None):
         query = DataAsset.query.filter_by(dataset_id=dataset_id)
         if data_asset_id:
             data_asset = query.filter_by(id=data_asset_id).first()
@@ -114,7 +114,7 @@ class DataAssetResource(Resource):
         } for data_asset in data_assets])
 
 class ColumnInfoResource(Resource):
-    def get(self, business_domain_id, dataset_id, data_asset_id, column_id=None):
+    def get(self, data_asset_id, column_id=None):
         query = ColumnInfo.query.filter_by(data_asset_id=data_asset_id)
         if column_id:
             column = query.filter_by(id=column_id).first()

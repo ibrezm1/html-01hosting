@@ -4,3 +4,5 @@ Flask-SQLAlchemy
 flask-swagger-ui
 psycopg2-binary
 flask_cors
+ngrok
+invoke

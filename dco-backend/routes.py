@@ -18,7 +18,7 @@ def create_app():
 
     # Swagger setup
     SWAGGER_URL = '/swagger'
-    API_URL = '/swagger/swagger.json'
+    API_URL = '/static/swagger/swagger.json'
     swagger_ui_blueprint = get_swaggerui_blueprint(
         SWAGGER_URL,
         API_URL,
@@ -29,8 +29,8 @@ def create_app():
     # Routes
     api.add_resource(BusinessDomainResource, '/api/business_domain', '/api/business_domain/<int:id>')
     api.add_resource(DatasetResource, '/api/business_domain/<int:business_domain_id>/dataset', '/api/business_domain/<int:business_domain_id>/dataset/<int:dataset_id>')
-    api.add_resource(DataAssetResource, '/api/business_domain/<int:business_domain_id>/dataset/<int:dataset_id>/data_asset', '/api/business_domain/<int:business_domain_id>/dataset/<int:dataset_id>/data_asset/<int:data_asset_id>')
-    api.add_resource(ColumnInfoResource, '/api/business_domain/<int:business_domain_id>/dataset/<int:dataset_id>/data_asset/<int:data_asset_id>/column', '/api/business_domain/<int:business_domain_id>/dataset/<int:dataset_id>/data_asset/<int:data_asset_id>/column/<int:column_id>')
+    api.add_resource(DataAssetResource, '/api/dataset/<int:dataset_id>/data_asset', '/api/dataset/<int:dataset_id>/data_asset/<int:data_asset_id>')
+    api.add_resource(ColumnInfoResource, '/api/data_asset/<int:data_asset_id>/column', '/api/data_asset/<int:data_asset_id>/column/<int:column_id>')
     api.add_resource(StreamContentResource, '/api/stream-content')
 
     @app.route('/')
